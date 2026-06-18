@@ -1,0 +1,33 @@
+from restaurant import Restaurant
+
+def main():
+    alfredus = Restaurant("Alfredu's", "Pizzeria")
+    bistro_paris = Restaurant('Bistro Paris', 'French')
+    sushi_zen = Restaurant('Sushi Zen', 'Japanese')
+    cantina_roma = Restaurant('Cantina Roma', 'Italian')
+    burger_king = Restaurant('Burger King', 'Fast Food')
+    taco_loco = Restaurant('Taco Loco', 'Mexican')
+    churrascaria_pampa = Restaurant('Churrascaria Pampa', 'Meat')
+    vegan_delight = Restaurant('Vegan Delight', 'Vegetarian')
+    central_bakery = Restaurant('Central Bakery', 'Bakery')
+    cafe_amargo = Restaurant('Café Amargo', 'Coffee Shop')
+    sorveteria_gelo = Restaurant('Sorveteria Gelo', 'Desserts')
+    mar_aberto = Restaurant('Mar Aberto', 'Seafood')
+    kebab_house = Restaurant('Kebab House', 'Arab')
+    spicy_thai = Restaurant('Spicy Thai', 'Thai')
+    fine_pastry_shop = Restaurant('Fine Pastry Shop', 'Pastry Shop')
+    corner_bar = Restaurant('Corner Bar', 'Bar and Snacks')
+
+    alfredus.receive_avaliation("Carlos", 5)
+    alfredus.receive_avaliation("Ana", 5)
+    alfredus.receive_avaliation("João", 5)
+    alfredus.receive_avaliation("Maria", 5)
+    alfredus.receive_avaliation("Pedro", 5)
+    alfredus.receive_avaliation("Lucas", 5)
+    alfredus.receive_avaliation("Juliana", 5)
+    alfredus.receive_avaliation("Fernanda", 5)
+    alfredus.receive_avaliation("Rafael", 5)
+    alfredus.receive_avaliation("Beatriz", 5)
+    Restaurant.list_restaurants()
+
+if __name__ == "__main__": main()

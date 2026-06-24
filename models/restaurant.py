@@ -1,4 +1,7 @@
 from .avaliation import Avaliation
+from .menu.menu_items import Menu
+from .menu.drink import Drink
+from .menu.food import Food
 
 class Restaurant:
     restaurants = list()
@@ -14,7 +17,7 @@ class Restaurant:
 
     @classmethod
     def list_restaurants(cls):
-        print(f"{"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | Avaliation")
+        print(f"\n{"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | Avaliation")
         for restaurant in cls.restaurants:
             print(f"{restaurant._name.ljust(20)} | {restaurant._category.ljust(15)} | {restaurant.avaliations_average()}")
 
@@ -31,3 +34,18 @@ class Restaurant:
         except ZeroDivisionError:
             return "-"
             
+    def add_in_menu(self, item):
+        if isinstance(item, Menu):
+            self._menu.append(item)
+
+    def list_menu(self):
+        print(f"\n{"Food".ljust(20)} | {"Cost".ljust(20)} | {"Description".ljust(20)}")
+        for item in self._menu:
+            if type(item) is Food:
+                print(f"{item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._description.ljust(20)}")
+
+        print(f"\n{"Drink".ljust(20)} | {"Cost".ljust(20)} | {"Size".ljust(20)}")
+        for item in self._menu:
+            if type(item) is Drink:
+                print(f"{item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._size.ljust(20)}")
+        

@@ -10,20 +10,27 @@ class Restaurant:
         self._category = category.title().strip()
         self._menu = list()
         self._avaliations = list()
+        self._id = None
         Restaurant.restaurants.append(self)
 
     def __str__(self):
         return f"{self._name} | {self._category}"
 
-    @classmethod
-    def list_restaurants(cls):
-        print(f"\n{"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | Avaliation")
-        for restaurant in cls.restaurants:
-            print(f"{restaurant._name.ljust(20)} | {restaurant._category.ljust(15)} | {restaurant.avaliations_average()}")
+    def list_restaurants(self):
+        if not self.restaurants:
+            print("The restaurant list is empty")
+            return
+        
+        print(f"\n{"Number".ljust(10)} | {"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | Avaliation")
+
+        for number, restaurant in enumerate(self.restaurants, start=1):
+            print(f"{str(number).ljust(10)} | {restaurant._name.ljust(20)} | {restaurant._category.ljust(15)} | {restaurant.avaliations_average()}")
 
     def receive_avaliation(self, user: str, note: int):
-        if not 0 <= note <= 5: return
+        if not 0 <= note <= 5:
+            return False
         self._avaliations.append(Avaliation(user.strip().title(), note))
+        return True
 
     def avaliations_average(self):
         sum = 0
@@ -39,13 +46,16 @@ class Restaurant:
             self._menu.append(item)
 
     def list_menu(self):
-        print(f"\n{"Food".ljust(20)} | {"Cost".ljust(20)} | {"Description".ljust(20)}")
-        for item in self._menu:
+        if not self._menu:
+            return False
+        
+        print(f"\n{"Number".ljust(10)} | {"Food".ljust(20)} | {"Cost".ljust(20)} | {"Description".ljust(20)}")
+        for number, item in enumerate(self._menu, start=1):
             if type(item) is Food:
-                print(f"{item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._description.ljust(20)}")
+                print(f"{str(number).ljust(10)} | {item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._description.ljust(20)}")
 
-        print(f"\n{"Drink".ljust(20)} | {"Cost".ljust(20)} | {"Size".ljust(20)}")
-        for item in self._menu:
+        print(f"\n{"Number".ljust(10)} | {"Drink".ljust(20)} | {"Cost".ljust(20)} | {"Size".ljust(20)}")
+        for number, item in enumerate(self._menu, start=1):
             if type(item) is Drink:
-                print(f"{item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._size.ljust(20)}")
+                print(f"{str(number).ljust(10)} | {item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._size.ljust(20)}")
         

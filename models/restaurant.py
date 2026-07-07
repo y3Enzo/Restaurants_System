@@ -10,7 +10,7 @@ class Restaurant:
         self._category = category.title().strip()
         self._menu = list()
         self._avaliations = list()
-        self._id = None
+        self._status = False
         Restaurant.restaurants.append(self)
 
     def __str__(self):
@@ -20,14 +20,15 @@ class Restaurant:
         if not self.restaurants:
             print("The restaurant list is empty")
             return
-        
-        print(f"\n{"Number".ljust(10)} | {"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | Avaliation")
 
+        print(f"\n{"Number".ljust(10)} | {"Restaurant Name".ljust(20)} | {"Category".ljust(15)} | {"Avaliation".ljust(15)} | Status")
         for number, restaurant in enumerate(self.restaurants, start=1):
-            print(f"{str(number).ljust(10)} | {restaurant._name.ljust(20)} | {restaurant._category.ljust(15)} | {restaurant.avaliations_average()}")
+            status = "Active" if restaurant._status else "Inactive"
+            print(f"{str(number).ljust(10)} | {restaurant._name.ljust(20)} | {restaurant._category.ljust(15)} | {str(restaurant.avaliations_average()).ljust(15)} | {status}")
 
     def receive_avaliation(self, user: str, note: int):
         if not 0 <= note <= 5:
+            print("The note isn't under 0 and 5")
             return False
         self._avaliations.append(Avaliation(user.strip().title(), note))
         return True
@@ -47,7 +48,8 @@ class Restaurant:
 
     def list_menu(self):
         if not self._menu:
-            return False
+            print("The restaurant menu is empty")
+            return
         
         print(f"\n{"Number".ljust(10)} | {"Food".ljust(20)} | {"Cost".ljust(20)} | {"Description".ljust(20)}")
         for number, item in enumerate(self._menu, start=1):
@@ -59,3 +61,5 @@ class Restaurant:
             if type(item) is Drink:
                 print(f"{str(number).ljust(10)} | {item._name.ljust(20)} | {str(item._cost).ljust(20)} | {item._size.ljust(20)}")
         
+    def change_status(self):
+        self._status = not self._status

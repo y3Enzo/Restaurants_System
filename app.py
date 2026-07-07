@@ -17,7 +17,23 @@ def create_restaurant():
 
         Restaurant(name, category)
         print(f"Restaurant {name}, category {category} created succesfully")
+        input("Enter anything to return... ")
         break
+
+def change_status():
+    while True:
+        try:
+            print("\n")
+            restaurant = int(input("Restaurant number: "))
+            restaurant -= 1
+            Restaurant.restaurants[restaurant].change_status()
+            print(f"Restaurant {Restaurant.restaurants[restaurant]._name} status cahnged succesfully")
+            input("Enter anything to return... ")
+            break
+        except ValueError:
+            print("ERROR: The value entered is not a number")
+        except IndexError:
+            print(f"ERROR: Don't exists a restaurant with number {restaurant + 1} in the list")
 
 def give_avaliation():
     while True:
@@ -72,6 +88,8 @@ def add_in_menu():
                     print("ERROR: Invalid option")
 
             Restaurant.restaurants[restaurant].add_in_menu(item)
+            print("Item added succesfully")
+            input("Enter anything to return... ")
             break
         except ValueError:
             print("ERROR: The value entered is not a number")
@@ -85,6 +103,7 @@ def list_menu():
             restaurant = int(input("Restaurant number: "))
             restaurant -= 1
             Restaurant.restaurants[restaurant].list_menu()
+            input("Enter anything to return... ")
             break
         except ValueError:
             print("ERROR: The value entered is not a number")
@@ -102,28 +121,31 @@ def main():
 ┃┗┛┗┛┃ ━┫┗┫┗━┫┗┛┃┃┃┃ ━┫
 ┗━━━━┻━━┻━┻━━┻━━┻┻┻┻━━┛""")
         print("[1] Create restaurant")
-        print("[2] List restaurants")
-        print("[3] Give avaliation")
-        print("[4] Add item in restaurant menu")
-        print("[5] List restaurant menu")
-        print("[6] Exit")
+        print("[2] Change restaurant status")
+        print("[3] List restaurants")
+        print("[4] Give avaliation")
+        print("[5] Add item in restaurant menu")
+        print("[6] List restaurant menu")
+        print("[7] Exit")
         option = int(input("Select an option by its number: "))
 
         match option:
             case 1:
                 create_restaurant()
             case 2:
-                Restaurant.list_restaurants(Restaurant)
+                change_status()
             case 3:
-                give_avaliation()
+                Restaurant.list_restaurants(Restaurant)
             case 4:
-                add_in_menu()
+                give_avaliation()
             case 5:
-                list_menu()
+                add_in_menu()
             case 6:
+                list_menu()
+            case 7:
                 break
             case _:
                 print("ERROR: Invalid option")
 
 if __name__ == "__main__":
-    main()
+        main()
